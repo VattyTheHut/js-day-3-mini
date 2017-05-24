@@ -10,7 +10,15 @@ Create an object called car using the object literal notation ({}). Give it a ma
 */
 
 // Code here
-var car;
+var car = {
+
+ make: "ele",
+ year: 1999,
+ model: "subral",
+ getAge: function(currentYear){
+    return currentYear - this.year;
+ }
+}
 
 
 /* 
@@ -20,7 +28,7 @@ Call the getAge method using the car object. Don't forget to pass the year argum
 */
 
 // Code here
-var carAge;
+var carAge = car.getAge();
 
 
 
@@ -34,8 +42,13 @@ Create another object called anotherCar with the make, model, and year propertie
 */
 
 // Code here
-var anotherCar;
 
+var anotherCar = {
+
+ make: "tebn",
+ year: 3001,
+ model: "bnb"
+}
 
 
 /*
@@ -45,7 +58,7 @@ Now bind the getAge method of the first car object to the context of anotherCar.
 */
 
 // Code here
-var getAgeForAnotherCar;
+var getAgeForAnotherCar = car.getAge(anotherCar.year);
 
 
 
@@ -57,7 +70,9 @@ Now assign a year property to the window object. Give that property the value 20
 */
 
 // Code here
-var windowAge;
+window.year = 2000;
+
+var windowAge = car.getAge.call({window}, 2017);
 
 /* 
 
@@ -84,7 +99,7 @@ var customer2 = {
    purchaseTotal: 400
 }
 
-// use apply here
+    customer1.addToTotal.apply(customer2, [1,2,3])
 
 
 
@@ -111,7 +126,7 @@ var dog = {
 }
 
 // Code here
-var makeDogSound;
+var makeDogSound = animal.makeSound.call({dog}, sound);
 
 // Use call or apply to invoke the makeSound method with different objects.
 
@@ -133,17 +148,29 @@ var objWithFind = {
    }
 }
 
+
+
+
+
 /*
 
-Now you can use my method with any object. Create an object and use my findProp method to find the correct value. You'll have to call my method and pass the right context, as well as the value you want to search.
+Now you can use my method with any object. Create an object and use my findProp method to find the correct value. 
+You'll have to call my method and pass the right context, as well as the value you want to search.
 
 */
 
-// Code here
+myobj = {
+    tofu: 2,
+    kale: 3,
+    hempMilk: 1 
 
+}
+
+    objWithFind.findProp.apply(myobj, [2])
 
 /*
-Below is another object with a filter method. This method filters returns a new object which contains only the properties with values that match the values in the array you pass to the method. 
+Below is another object with a filter method. This method filters returns a new object which contains only 
+the properties with values that match the values in the array you pass to the method. 
 
 */ 
 
@@ -162,6 +189,9 @@ var objWithFilter = {
 }
 
 // Now call my filter method on a new object. 
+
+
+objWithFilter.filter.call(myobj,1)
 
 
 /* 
@@ -187,6 +217,12 @@ Let's Use the Array.prototype or String.prototype or Object.prototype methods to
 Call the String.prototype.toUpperCase method and pass it a new string as a context.
 */
 
+var str = "earl sweatshirt";
+str.toUpperCase()
+String.prototype.toUpperCase.call(str)
+
+
+
 // Code here
 Array.prototype.filter.call([1, 2, 3], function() {return true})
 
@@ -194,8 +230,8 @@ Array.prototype.filter.call([1, 2, 3], function() {return true})
 /*
 Call the Array.prototype.filter method and pass it a new array as context and a callback function as an argument.
 */
-
-// Code here
+var Arr = [43, 5, 3, 12, 6, 78, 0, 9, 0 ,0]
+Array.prototype.filter.apply(Arr, [function() {return true}])
 
 
 
@@ -203,7 +239,9 @@ Call the Array.prototype.filter method and pass it a new array as context and a 
 Apply the String.prototype.replace method and pass it a new string as context and an array which contains a value to search and a value to replace it with.
 */
 
-// Code here
+var words = ["Apply the String.prototype.replace method and pass it a new string as context and an array which contains a value to search and a value to replace it with."]
+
+String.prototype.replace.call(words, "String.prototype.replace", "word.replace(str, /'replace')")
 
 
 /*
@@ -215,7 +253,12 @@ Create a constructor function for Person. Take in the name, age, and weight of a
 
 */
 
-// Code here
+var Person = function(name, age, weight){
+
+    this.name = name
+    this.age = age
+    this.weight = weight
+}
 /* 
 11. Prototype Creation
 
@@ -223,8 +266,10 @@ Now give your Person object a prototype method called addWeight. Take in the add
 
 */
 
-// Code here
 
+    Person.prototype.addWeight = function(adder){
+        this.weight += adder
+    }
 
 /*
 12. Create Persons
@@ -234,7 +279,7 @@ Create two persons, brian and briansClone, based on your Person object. Call the
 */ 
 
 // Code here
-var brian;
-var briansClone;
+var brian = new Person('brian', 19, 157);
+var briansClone = new Person('briansClone', 19, 157);;
 
 
